@@ -1,0 +1,27 @@
+#include <iostream>
+#include "BinaryTree.h"
+using namespace std;
+
+int main()
+{
+	
+	BinaryTree root;
+	
+	root.insertNode(50);
+	root.insertNode(40);
+	root.insertNode(45);
+	root.insertNode(60);
+	root.insertNode(55);
+	root.insertNode(30);
+	root.insertNode(70);
+	
+	cout << "Entered Nodes in PreOrder: ";
+	root.preOrder();
+	cout << endl;
+	
+	cout << "Entered Nodes in Inorder: ";
+	root.inOrder();
+
+	root.insertNode(70);
+	return 0;
+}
