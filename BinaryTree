@@ -1,0 +1,109 @@
+#include <iostream>
+#ifndef BINARYTREE_H
+#define BINARYTREE_H
+using namespace std;
+
+
+class BinaryTree
+{
+	private:
+		
+		struct Tnode //Binary Node linked list structure
+		{
+			int data;
+			Tnode *leftleaf, *rightleaf;	
+		};
+		
+		Tnode *root; //Binary Node pointer: variable for first node
+		
+	public:
+	
+		BinaryTree() //Constructor: sett root to null
+		{
+			root = nullptr;
+		}
+		
+		
+		Tnode *insertNode(int num) //Function: Create a new temp node and assign to binary tree
+		{
+			Tnode *temp = new Tnode; //Temp node to hold passed data and set children to null
+			temp->data = num;
+			temp->leftleaf = nullptr;
+			temp->rightleaf = nullptr;
+			
+			Tnode *current = root; //Binary Node: Holds the current position in tree
+			Tnode *previous = nullptr; // Binary Node: Holds last position in tree
+			
+			while(current != nullptr) //Loop: Traverse tree while current is not null
+			{
+				previous = current; //Set previous node equal to current node 
+				
+				if(num < current->data) //If: If passed data is less than current data go to left child else go right child
+				{
+					current = current->leftleaf;
+				}
+				else
+				{
+					current = current->rightleaf;
+				}
+			}
+			
+			
+			if(previous == nullptr) //If: if previous node is equal to null pointer set new node as root of linked list
+			{
+				root = temp;
+			}
+			else if(num == previous->data) //Else: if data passed is duplicate return duplicate entry
+			{
+				cout << "\nDuplicate number entered.\n" << endl;
+			}
+			else if(num < previous->data) //Else: if passed data is less than previous data set left child equal to temp node
+			{
+				previous->leftleaf = temp;
+			}
+			else //Else: if data is greater than passed data set right child equal to temp node
+			{
+				previous->rightleaf = temp;
+			}
+			
+			return previous; 
+		}
+		
+		void preOrder() //Function: pass root node to overloaded recursive function
+		{
+			preOrder(root);
+		}
+		
+		void preOrder(Tnode *root) //Overloaded Function: Output data preorder, data-left child-right child, recursive call until null
+		{
+			if(root)
+			{
+				cout << root->data << " ";
+				preOrder(root->leftleaf);
+				preOrder(root->rightleaf);
+			}
+			else
+			return;
+			
+		}
+		
+		void inOrder() //Function: pass root node to overloaded recursive function
+		{
+			inOrder(root);
+		}
+		
+		void inOrder(Tnode *root) //Overloaded Function: Output data inorder, left child-data-right child, recursive call until null
+		{
+			if(root)
+			{
+				inOrder(root->leftleaf);
+				cout << root->data << " ";
+				inOrder(root->rightleaf);
+			}
+			else
+			return;
+		}	
+		
+};
+
+#endif
